@@ -4,6 +4,10 @@ import './App.css';
  
 function App() {
   const [city, setCity] = useState("")
+  const [firstTemp, setFirstTemp] = useState("")
+  const [firstWind, setFirstWind] = useState("")
+  const [firstHumidity, setFirstHumidity] = useState("")
+  const [firstUv, setFirstUv] = useState("")
   const api = `https://api.openweathermap.org/data/2.5/weather?q=${city},USA&APPID=cfe0b2658aec5af16bf8115cfd986eca`
   
 
@@ -17,6 +21,9 @@ function App() {
      .then (res => res.json())
      .then(data => {
       console.log(data)
+      setFirstTemp(data.main.temp)
+      setFirstHumidity(data.main.humidity)
+      setFirstWind(data.wind.speed)
      })
 
   }
@@ -53,10 +60,10 @@ function App() {
             <div>  <h1 className="margin marginleft" id="MainCity"></h1> </div>
 
             <div >
-              <p> Temp: <span id="MainTemp"> </span></p>
-              <p> Wind: <span id="MainWind"> </span></p>
-              <p> Humidity: <span id="MainHumidity"> </span></p>
-              <p> UV index: <span id="MainUV">  </span></p>
+              <p> Temp: <span id="MainTemp"> {firstTemp} </span></p>
+              <p> Wind: <span id="MainWind"> {firstWind}</span></p>
+              <p> Humidity: <span id="MainHumidity"> {firstHumidity}</span></p>
+              <p> UV index: <span id="MainUV"> {firstUv} </span></p>
             </div>
           </div>
 
