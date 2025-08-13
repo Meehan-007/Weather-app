@@ -1,6 +1,26 @@
 import './App.css';
 
+ import React, { useEffect, useState } from 'react';
+ 
 function App() {
+  const [city, setCity] = useState("")
+  const api = `https://api.openweathermap.org/data/2.5/weather?q=${city},USA&APPID=cfe0b2658aec5af16bf8115cfd986eca`
+  
+
+  const handleChange = (e) => {
+    setCity(e.target.value) 
+    console.log(city); 
+  }
+
+  const handleSubmit = (e) => {
+     fetch(api)
+     .then (res => res.json())
+     .then(data => {
+      console.log(data)
+     })
+
+  }
+
   return (
     <>
       <div className="banner">
@@ -12,14 +32,14 @@ function App() {
         <section className="col4 flex-column height itemscenter">
 
           <div className="align-content-left width">
-            <H1 id="searchheading"> Search for a City</H1>
+            <h1 id="searchheading"> Search for a City</h1>
           </div>
 
           <form id="searchbar" className="full flex-column itemscenter">
-            <input className="UIform" type="text" placeholder="search for your city"/>
+            <input className="UIform" type="text" value={city} onChange={handleChange} placeholder="search for your city"/>
           </form>
 
-          <button className="search"> Search</button>
+          <button onClick={handleSubmit} className="search"> Search</button>
 
           <hr id="line" className="width hide" />
 
